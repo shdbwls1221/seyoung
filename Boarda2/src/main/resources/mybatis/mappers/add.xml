@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.example.Boarda.dao.BoardDaoo"> 
+	
+ 	<select id="view" resultType="String">
+		SELECT *
+		FROM BoardTables
+		 WEHRE #{Num}
+	</select>
+	<select id="list" resultType="map">
+		 SELECT USERNAME,MEMO,NUM
+		 FROM BoardTables 
+	</select>
+	 <select id="search" resultType="String">
+		SELECT *
+		FROM BoardTables
+	
+	</select>
+	<insert id="add">
+		insert into BoardTable(Num,UserName,Memo,Password) values(autoNum.NEXTVAL,#{name},#{memo},#{password})	
+	</insert>
+</mapper>
