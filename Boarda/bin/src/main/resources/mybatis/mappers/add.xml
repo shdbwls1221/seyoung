@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" > 
+
+<mapper namespace="com.example.Boarda.dao.BoardDaoo"> 
+	
+	<select id="count" resultType="String">
+		SELECT COUNT (1)
+		FROM tb_member
+	</select>
+	
+	
+</mapper>
+	
