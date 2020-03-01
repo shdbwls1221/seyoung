@@ -15,68 +15,10 @@
 function Add(){
 	location.href = "add";
 }
-function BoardGrid(){
-		$('#boardTable').dataTable({
-			"columnDefs":[{  //컬럼에 값이 없을때 -로 대체해주는 곳
-				"defaultContent": "-",
-				"targets": "_all"
-			}],
-         pageLength: 3, //페이지 길이
-         bPaginate: true, //페이징 활성화
-         bLengthChange: true, 
-         lengthMenu : [ [ 3, 5, 10, -1 ], [ 3, 5, 10, "All" ] ],
-         bAutoWidth: false,
-         processing: true,
-         bServerSide: true,
-         searching: true,
-         ajax : {
-             "url":"/getList.do",
-             "type":"GET",
-             dataType:"JSON"
-         },
-         columns : [
-             {data: "NUMBER"},
-             {data: "MEMO"},
-             {data: "USERNAME"}
-         ]
-		
-     });
-	
-}
-function search(){
-	 $('#boardTable').dataTable({
-		 "columnDefs":[{            //컬럼에 값이 없을때 -로 대체해주는 곳
-				"defaultContent": "-",
-				"targets": "_all"
-			}],
-         pageLength: 3,
-         bPaginate: true,
-         bLengthChange: true,
-         lengthMenu : [ [ 3, 5, 10, -1 ], [ 3, 5, 10, "All" ] ],
-         bAutoWidth: false,
-         processing: true,
-         serverSide: false,
-         searching: true,
-         ajax : {
-             "url":"/getList.do",
-             "type":"GET",
-             dataType:"JSON"
-         },
-         columns : [
-             {data: "Number"},
-             {data: "Memo"},
-             {data: "UserName"}
-         ]
-
-     });
-}
-$(document).ready(function(){
-	BoardGrid();	
-});
 </script>
 <body>
 	<c:import url="header.jsp" />
-	<table id="boardTable" class="table table-bordered table-hover table-sm" >
+	<table border="1" width="600px" >
     <colgroup>
 	<col width="20%"/>
 	<col width="*"/>
@@ -86,9 +28,15 @@ $(document).ready(function(){
         <tr>
             <th>글번호</th>
             <th>내용</th>
-            <th>작성자</th>
-            
+            <th>작성자</th>        
         </tr>
+        <c:forEach var="row" items="{list}">
+        <tr>
+        <td>${row.num}</td>
+        <td><a href="${path}/board/view.do?num=${row.num}">${row.memo}</a></td>
+        <td>${row.userName}</td>
+        </tr>
+        </c:forEach>
     </thead>
 </table>
 	<!-- <input type="text" id="search" name="search" size="20"> -->

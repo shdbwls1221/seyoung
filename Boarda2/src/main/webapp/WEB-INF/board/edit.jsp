@@ -8,19 +8,7 @@
 </head>
 <script>
 function edit(){
-	 $.ajax({
-		 url: "/addBoad.do",
-		 type: "POST",
-		 dataType: "json",
-		 data:{
-			 Username:$('#name').val(),
-			 Password:$('#password').val(),
-			 MemoL:$('#memo').val()
-		 }
-		 success: function(data){
-			 alert('µî·Ï');
-		 }
-	 });
+
 }
 function cancel(){
 	location.href = "/cancel";

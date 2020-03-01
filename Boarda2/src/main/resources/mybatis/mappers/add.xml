@@ -4,19 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="com.example.Boarda.dao.BoardDaoo"> 
 	
- 	<select id="view" resultType="String">
+ 	<select id="view" resultType="com.example.Boarda.model.BoardVO">
 		SELECT *
 		FROM BoardTables
 		 WEHRE #{Num}
 	</select>
-	<select id="list" resultType="map">
+	<select id="list" resultType="com.example.Boarda.model.BoardVO">
 		 SELECT USERNAME,MEMO,NUM
 		 FROM BoardTables 
 	</select>
 	 <select id="search" resultType="String">
 		SELECT *
-		FROM BoardTables
-	
+		FROM BoardTables	
 	</select>
 	<insert id="add">
 		insert into BoardTable(Num,UserName,Memo,Password) values(autoNum.NEXTVAL,#{name},#{memo},#{password})	

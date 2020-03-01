@@ -11,31 +11,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Boarda.dao.BoardDaoo;
 
-@RestController
+@Controller
 public class boardController {
 	@Autowired
 	BoardDaoo baordDaoo;
 
-	@RequestMapping("/getList.do")
-	public Map<String, Object> list() {
-		Map<String, Object> data = baordDaoo.list();
-		return data;
+	@RequestMapping("/getList")
+	public ModelAndView list() throws Exception{
+		List<BardVO> list=baordDaoo.list();
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("main");
+		mav.addObject("main",list);
+		return mav;
 	}
-
-	@RequestMapping("/getSearchList.do")
-	public Map<String, Object> search() {
-		Map<String, Object> data = baordDaoo.search();
-		return data;
+	@RequestMapping(value="view.do",method=RequestMethod.GET)
+	public ModelAndView view(@RequestParam int num, HttpSession ssesion) throws Exception{
+		modelAndView mav=new ModelAndView();
+		mav.setViewName("board/view");
+		mav.addObject("dto",baordDaoo.view(num));
 	}
-
-	@RequestMapping("/addBoad.do")
-	public Enumeration<String> Add(HttpServletRequest req) {
-		Enumeration<String> data = req.getParameter();
-		while (data.hasMoreElements()) {
-			String temp = data.nextElement();
-		}
-
-		return data;
+	@RequestMapping(value="addBoad.do",method=RequestMethod.POST)
+	public String add(@modelAttribute BoardVO vo) throws Exception {
+		baordDaoo.add(vo);
+		return "redirect:main";
 	}
-
+	@RequestMapping(value="editBoad.do",method=RequestMethod.POST)
+	public String add(@modelAttribute BoardVO vo) throws Exception {
+		baordDaoo.edit(vo);
+		return "redirect:main";
+	}
 }
